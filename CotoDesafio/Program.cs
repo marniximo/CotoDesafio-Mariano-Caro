@@ -17,6 +17,10 @@ var builder = WebApplication.CreateBuilder(args);
  */
 
 // Add services to the container.
+builder.Services.AddDbContext<CarSalesDbContext>(options =>
+    options.UseInMemoryDatabase("SalesDb"));
+
+
 
 builder.Services.AddControllers();
 
