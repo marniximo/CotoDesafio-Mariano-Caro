@@ -4,7 +4,6 @@ using CotoDesafio.Infrastructure.Interfaces;
 using CotoDesafio.Infrastructure.Repository;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 /*
@@ -18,6 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 •            Obtener el porcentaje de unidades de cada modelo vendido en cada centro sobre el total de ventas de la empresa.
  */
 
+// Configurar EF Core con SQLite en memoria
 var connection = new SqliteConnection("DataSource=:memory:");
 connection.Open();
 
@@ -38,7 +38,7 @@ builder.Services.AddScoped<ExecutionTimeActionFilter>();
 
 builder.Services.AddControllers(options =>
 {
-    options.Filters.Add<ExecutionTimeActionFilter>();
+    options.Filters.Add<ExecutionTimeActionFilter>(); // Agregar el filtro a todos los controladores para medir el tiempo de ejecucion de los endpoints
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

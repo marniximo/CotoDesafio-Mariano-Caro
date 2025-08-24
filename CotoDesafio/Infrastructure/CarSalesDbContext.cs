@@ -14,7 +14,7 @@ namespace CotoDesafio.Infrastructure
 
         public CarSalesDbContext(DbContextOptions<CarSalesDbContext> options) : base(options) { }
 
-        //En este metodo se arman las relaciones entre entidades, y se seedean los datos
+        //En este metodo se arman las relaciones entre entidades, y se seedean los datos para este test no persistente
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

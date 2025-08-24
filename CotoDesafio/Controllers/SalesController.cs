@@ -1,5 +1,6 @@
 ﻿using CotoDesafio.Application.Commands;
 using CotoDesafio.Application.Queries;
+using CotoDesafio.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +18,17 @@ namespace CotoDesafio.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Registers a new sale.
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(typeof(string), 201)]
+        [ProducesResponseType(typeof(string), 400)]
+        [ProducesResponseType(typeof(string), 404)]
+        [ProducesResponseType(typeof(string), 422)]
+        [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> PostRegister([FromBody] RegisterSaleCommand cmd)
         {
             if (cmd == null)
@@ -41,11 +52,19 @@ namespace CotoDesafio.Controllers
             }
             catch (Exception ex)
             {
-                // Optionally log the exception here
                 return StatusCode(500, "An unexpected error occurred.");
             }
         }
 
+        /// <summary>
+        /// Gets total sales for a specific distribution center.
+        /// </summary>
+        /// <param name="centerId"></param>
+        /// <returns></returns>
+        [ProducesResponseType(typeof(IEnumerable<Sale>), 200)]
+        [ProducesResponseType(typeof(string), 400)]
+        [ProducesResponseType(typeof(string), 404)]
+        [ProducesResponseType(typeof(string), 500)]
         [HttpGet("GetTotalSalesByCenterId/{centerId}")]
         public async Task<IActionResult> GetTotalSalesByCenterId(Guid centerId)
         {
@@ -70,6 +89,13 @@ namespace CotoDesafio.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets total sales for all centers.
+        /// </summary>
+        /// <returns></returns>
+        [ProducesResponseType(typeof(IEnumerable<Sale>), 200)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(typeof(string), 500)]
         [HttpGet("GetTotalSales")]
         public async Task<IActionResult> GetTotalSales()
         {
@@ -89,6 +115,12 @@ namespace CotoDesafio.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets the percentage of units of each model sold in each center over the total company sales.
+        /// </summary>
+        /// <returns></returns>
+        [ProducesResponseType(typeof(IEnumerable<PercentageByCenterDto>), 200)]
+        [ProducesResponseType(typeof(string), 500)]
         [HttpGet("GetPercentages")]
         public async Task<IActionResult> GetPercentages()
         {

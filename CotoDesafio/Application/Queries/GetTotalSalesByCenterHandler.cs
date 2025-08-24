@@ -14,7 +14,7 @@ namespace CotoDesafio.Application.Queries
 
         public async Task<SaleTotalDto> Handle(GetTotalSalesByCenterQuery request, CancellationToken cancellationToken)
         {
-            var sales = await _saleRepository.GetTotalSalesByCenterAsync(request.DistributionCenterId);
+            var sales = await _saleRepository.GetTotalSalesByCenterAsync(request.DistributionCenterId); // Obtener las ventas totales por centro de distribucion
             return new SaleTotalDto (
                 sales.Count, 
                 sales.Sum(s => s.GetFinalSalePrice()) // calculo de impuesto en el total de la venta

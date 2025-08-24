@@ -19,6 +19,14 @@ namespace CotoDesafio.Infrastructure.Filters
             _stopwatch = Stopwatch.StartNew();
         }
 
+        /// <summary>
+        /// Logs the execution time of an action after it has been executed.
+        /// </summary>
+        /// <remarks>This method stops the internal stopwatch used to measure the elapsed time of the
+        /// action's execution  and logs the controller name, action name, and execution duration in
+        /// milliseconds.</remarks>
+        /// <param name="context">The <see cref="ActionExecutedContext"/> containing information about the executed action,  such as route
+        /// data and the action's execution context.</param>
         public void OnActionExecuted(ActionExecutedContext context)
         {
             _stopwatch.Stop();

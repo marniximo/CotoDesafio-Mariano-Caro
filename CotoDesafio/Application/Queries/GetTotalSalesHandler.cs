@@ -16,17 +16,17 @@ namespace CotoDesafio.Application.Queries
 
         public async Task<IEnumerable<CenterSaleTotalDto>> Handle(GetTotalSalesQuery request, CancellationToken cancellationToken)
         {
-            var distributionCenters = await _centerRepository.GetAllAsync();
+            var distributionCenters = await _centerRepository.GetAllAsync(); // Obtener todos los centros de distribucion
             var result = new List<CenterSaleTotalDto>();
             foreach (var center in distributionCenters)
             {
-                var sales = await _saleRepository.GetTotalSalesByCenterAsync(center.Id);
+                var sales = await _saleRepository.GetTotalSalesByCenterAsync(center.Id); // Obtener las ventas totales por centro de distribucion
                 var totalSales = new CenterSaleTotalDto(
                     center.Id.ToString(),
                     center.Name,
                     new SaleTotalDto(sales.Count, sales.Sum(s => s.GetFinalSalePrice())) // calculo de impuesto en el total de la venta
                 );
-                result.Add(totalSales);
+                result.Add(totalSales); // Agregar el resultado a la lista
             }
             return result;
         }
