@@ -12,7 +12,7 @@ namespace CotoDesafio.UnitTests.Domain
             var carModel = new CarModel
             {
                 CarModelName = "Sport",
-                Price = new Money(100_000, "USD"),
+                Price = 100_000m,
                 Tax = 10m // 10%
             };
 
@@ -20,8 +20,7 @@ namespace CotoDesafio.UnitTests.Domain
             var finalPrice = carModel.GetFinalPrice();
 
             // Assert
-            Assert.Equal(110_000, finalPrice.Amount);
-            Assert.Equal("USD", finalPrice.Currency);
+            Assert.Equal(110_000m, finalPrice);
         }
 
         [Fact]
@@ -31,7 +30,7 @@ namespace CotoDesafio.UnitTests.Domain
             var carModel = new CarModel
             {
                 CarModelName = "Basic",
-                Price = new Money(50_000, "USD"),
+                Price = 50_000m,
                 Tax = 0m
             };
 
@@ -39,8 +38,7 @@ namespace CotoDesafio.UnitTests.Domain
             var finalPrice = carModel.GetFinalPrice();
 
             // Assert
-            Assert.Equal(50_000, finalPrice.Amount);
-            Assert.Equal("USD", finalPrice.Currency);
+            Assert.Equal(50_000m, finalPrice);
         }
 
         [Fact]
@@ -50,7 +48,7 @@ namespace CotoDesafio.UnitTests.Domain
             var carModel = new CarModel
             {
                 CarModelName = "Discounted",
-                Price = new Money(20_000, "USD"),
+                Price = 20_000m,
                 Tax = -10m // -10% (should reduce price)
             };
 
@@ -58,8 +56,7 @@ namespace CotoDesafio.UnitTests.Domain
             var finalPrice = carModel.GetFinalPrice();
 
             // Assert
-            Assert.Equal(18_000, finalPrice.Amount);
-            Assert.Equal("USD", finalPrice.Currency);
+            Assert.Equal(18_000m, finalPrice);
         }
 
         [Fact]
@@ -70,8 +67,7 @@ namespace CotoDesafio.UnitTests.Domain
 
             // Assert
             Assert.Equal(string.Empty, carModel.CarModelName);
-            Assert.Equal(0, carModel.Price.Amount);
-            Assert.Equal("USD", carModel.Price.Currency);
+            Assert.Equal(0, carModel.Price);
             Assert.Equal(0, carModel.Tax);
             Assert.NotNull(carModel.Sales);
         }

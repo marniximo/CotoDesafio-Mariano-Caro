@@ -13,7 +13,7 @@ namespace CotoDesafio.UnitTests.Domain
             var carModel = new CarModel
             {
                 CarModelName = "TestModel",
-                Price = new Money(100_000, "USD"),
+                Price = 100_000m,
                 Tax = 15m
             };
             var sale = new Sale
@@ -30,8 +30,7 @@ namespace CotoDesafio.UnitTests.Domain
             var finalPrice = sale.GetFinalSalePrice();
 
             // Assert
-            Assert.Equal(115_000, finalPrice.Amount);
-            Assert.Equal("USD", finalPrice.Currency);
+            Assert.Equal(115_000m, finalPrice);
         }
 
         [Fact]
