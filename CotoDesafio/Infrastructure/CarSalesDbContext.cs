@@ -1,5 +1,6 @@
 ﻿using CotoDesafio.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Collections.Generic;
 
 namespace CotoDesafio.Infrastructure
@@ -37,16 +38,21 @@ namespace CotoDesafio.Infrastructure
             // Seed de centros
             modelBuilder.Entity<DistributionCenter>().HasData(
                 new DistributionCenter { Id = Guid.Parse("11111111-1111-1111-1111-111111111111"), Name = "Centro Norte" },
-                new DistributionCenter { Id = Guid.Parse("22222222-2222-2222-2222-222222222222"), Name = "Centro Sur" }
+                new DistributionCenter { Id = Guid.Parse("22222222-2222-2222-2222-222222222222"), Name = "Centro Sur" },
+                new DistributionCenter { Id = Guid.Parse("33333333-3333-3333-3333-333333333333"), Name = "Centro Este" },
+                new DistributionCenter { Id = Guid.Parse("44444444-4444-4444-4444-444444444444"), Name = "Centro Oeste" }
             );
 
             // Seed de autos
-            modelBuilder.Entity<CarModel>().HasData(
-                new CarModel { CarModelName = "Sedan", Price = new Money(8000, "USD"), Tax = 0m },
-                new CarModel { CarModelName = "SUV", Price = new Money(9500, "USD"), Tax = 0m },
-                new CarModel { CarModelName = "OffRoad", Price = new Money(12500, "USD"), Tax = 0m },
-                new CarModel { CarModelName = "Sport", Price = new Money(18200, "USD"), Tax = 7m } // 7% de impuesto
-            );
+            modelBuilder.Entity<CarModel>(builder =>
+            {
+                builder.HasData(
+                    new CarModel { CarModelName = "Sedan", Price = 8000m, Tax = 0m },
+                    new CarModel { CarModelName = "SUV", Price = 9500m, Tax = 0m },
+                    new CarModel { CarModelName = "OffRoad", Price = 12500m, Tax = 0m },
+                    new CarModel { CarModelName = "Sport", Price = 18200m, Tax = 7m }
+                );
+            });
 
             // Seed de ventas
             modelBuilder.Entity<Sale>().HasData(
@@ -55,63 +61,81 @@ namespace CotoDesafio.Infrastructure
                     CarChassisNumber = "1234ejemplo",
                     CarModelName = "Sedan",
                     Date = DateTime.Now,
-                    DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111")
+                    DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                    CarModel = null, // Evito el error de referencia circular en el seed data
+                    DistributionCenter = null,
                 },
                 new Sale
                 {
                     CarChassisNumber = "1235ejemplo",
                     CarModelName = "Sedan",
                     Date = DateTime.Now,
-                    DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222")
+                    DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                    CarModel = null, // Evito el error de referencia circular en el seed data
+                    DistributionCenter = null,
                 },
                 new Sale
                 {
                     CarChassisNumber = "1236ejemplo",
                     CarModelName = "Sport",
                     Date = DateTime.Now,
-                    DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111")
+                    DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                    CarModel = null, // Evito el error de referencia circular en el seed data
+                    DistributionCenter = null,
                 },
                 new Sale
                 {
                     CarChassisNumber = "1237ejemplo",
                     CarModelName = "OffRoad",
                     Date = DateTime.Now,
-                    DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222")
+                    DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                    CarModel = null, // Evito el error de referencia circular en el seed data
+                    DistributionCenter = null,
                 },
                 new Sale
                 {
                     CarChassisNumber = "1238ejemplo",
                     CarModelName = "SUV",
                     Date = DateTime.Now,
-                    DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111")
+                    DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                    CarModel = null, // Evito el error de referencia circular en el seed data
+                    DistributionCenter = null,
                 },
                 new Sale
                 {
                     CarChassisNumber = "1239ejemplo",
                     CarModelName = "Sedan",
                     Date = DateTime.Now,
-                    DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111")
+                    DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                    CarModel = null, // Evito el error de referencia circular en el seed data
+                    DistributionCenter = null,
                 },
                 new Sale
                 {
                     CarChassisNumber = "1211ejemplo",
                     CarModelName = "Sport",
                     Date = DateTime.Now,
-                    DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222")
+                    DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                    CarModel = null, // Evito el error de referencia circular en el seed data
+                    DistributionCenter = null,
                 },
                 new Sale
                 {
                     CarChassisNumber = "11114ejemplo",
                     CarModelName = "OffRoad",
                     Date = DateTime.Now,
-                    DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222")
+                    DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                    CarModel = null, // Evito el error de referencia circular en el seed data
+                    DistributionCenter = null,
                 },
                 new Sale
                 {
                     CarChassisNumber = "1223334ejemplo",
                     CarModelName = "SUV",
                     Date = DateTime.Now,
-                    DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111")
+                    DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                    CarModel = null, // Evito el error de referencia circular en el seed data
+                    DistributionCenter = null,
                 }
             );
         }

@@ -13,6 +13,8 @@ namespace CotoDesafio.Infrastructure.Repository
             this._context = _context;
         }
 
+        public async Task<List<DistributionCenter>> GetAllAsync() => await _context.DistributionCenters.ToListAsync();
+
         public async Task<DistributionCenter?> GetByIdAsync(Guid id) => await _context.DistributionCenters.Where(d => d.Id == id).FirstOrDefaultAsync();
     }
 }

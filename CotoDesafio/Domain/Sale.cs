@@ -12,7 +12,7 @@ namespace CotoDesafio.Domain
         public DistributionCenter DistributionCenter { get; set; } = new DistributionCenter(); // Propiedad de navegacion de EF 
         public DateTime Date { get; set; } = new DateTime();
 
-        public Money GetFinalSalePrice() => CarModel.GetFinalPrice();
+        public decimal GetFinalSalePrice() => CarModel.GetFinalPrice();
     }
 
 }

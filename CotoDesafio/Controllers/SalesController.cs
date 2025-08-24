@@ -20,19 +20,21 @@ namespace CotoDesafio.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterSaleCommand cmd)
         {
             var saleId = await _mediator.Send(cmd);
-            return Ok(saleId);
+            return Created("Sale",saleId);
         }
 
         [HttpGet("GetTotalSalesByCenterId/{centerId}")]
         public async Task<IActionResult> GetByCenter(Guid centerId)
         {
-            return Ok();
+            var saleTotalByCenter = await _mediator.Send(new GetTotalSalesByCenterQuery(centerId));
+            return Ok(saleTotalByCenter);
         }
 
         [HttpGet("GetTotalSales")]
         public async Task<IActionResult> GetTotal()
         {
-            return Ok();
+            var saleTotal = await _mediator.Send(new GetTotalSalesQuery());
+            return Ok(saleTotal);
         }
 
         [HttpGet("GetPercentages")]
