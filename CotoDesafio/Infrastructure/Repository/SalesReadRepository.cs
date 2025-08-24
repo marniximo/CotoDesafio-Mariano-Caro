@@ -15,5 +15,7 @@ namespace CotoDesafio.Infrastructure.Repository
 
         public async Task<List<Sale>> GetTotalSalesByCenterAsync(Guid centerId) =>
             await context.Sales.Where(s => s.DistributionCenterId == centerId).Include(s => s.DistributionCenter).ToListAsync();
+
+        public async Task<int> GetTotalSalesCount() => await context.Sales.CountAsync();
     }
 }
