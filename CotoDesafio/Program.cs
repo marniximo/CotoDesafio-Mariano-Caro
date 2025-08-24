@@ -1,10 +1,10 @@
 using CotoDesafio.Infrastructure;
+using CotoDesafio.Infrastructure.Filters;
 using CotoDesafio.Infrastructure.Interfaces;
 using CotoDesafio.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
 /*
     Una fábrica de automóviles produce 4 modelos de coches (sedan, suv, offroad, sport) cuyos precios de venta son: 8.000 u$s, 9.500 u$s, 12.500 u$s y 18.200 u$s. 
     La empresa tiene 4 centros de distribución y venta. Se tiene una relación de datos correspondientes al tipo de vehículo vendido y punto de distribución en el que se produjo la venta del mismo.
@@ -28,9 +28,14 @@ builder.Services.AddScoped<ICarModelReadRepository, CarModelReadRepository>();
 builder.Services.AddScoped<ISaleRepository, SalesRepository>();
 builder.Services.AddScoped<ISaleReadRepository, SalesReadRepository>();
 builder.Services.AddScoped<IDistributionCenterRepository, DistributionCenterRepository>();
-//
 
-builder.Services.AddControllers();
+// Agregar middleware de tiempo de ejecucion
+builder.Services.AddScoped<ExecutionTimeActionFilter>();
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ExecutionTimeActionFilter>();
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
