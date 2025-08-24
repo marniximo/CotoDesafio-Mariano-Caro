@@ -2,7 +2,9 @@ using CotoDesafio.Infrastructure;
 using CotoDesafio.Infrastructure.Filters;
 using CotoDesafio.Infrastructure.Interfaces;
 using CotoDesafio.Infrastructure.Repository;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 /*
@@ -16,9 +18,11 @@ var builder = WebApplication.CreateBuilder(args);
 •            Obtener el porcentaje de unidades de cada modelo vendido en cada centro sobre el total de ventas de la empresa.
  */
 
-// Add services to the container.
+var connection = new SqliteConnection("DataSource=:memory:");
+connection.Open();
+
 builder.Services.AddDbContext<CarSalesDbContext>(options =>
-    options.UseInMemoryDatabase("SalesDb"));
+    options.UseSqlite(connection));
 
 // MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
@@ -42,6 +46,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<CarSalesDbContext>();
+    db.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

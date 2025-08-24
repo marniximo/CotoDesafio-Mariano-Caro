@@ -60,7 +60,7 @@ namespace CotoDesafio.Infrastructure
                 {
                     CarChassisNumber = "1234ejemplo",
                     CarModelName = "Sedan",
-                    Date = DateTime.Now,
+                    Date = DateTime.Parse("205-08-24"),
                     DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
                     CarModel = null, // Evito el error de referencia circular en el seed data
                     DistributionCenter = null,
@@ -69,7 +69,7 @@ namespace CotoDesafio.Infrastructure
                 {
                     CarChassisNumber = "1235ejemplo",
                     CarModelName = "Sedan",
-                    Date = DateTime.Now,
+                    Date = DateTime.Parse("205-08-24"),
                     DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222"),
                     CarModel = null, // Evito el error de referencia circular en el seed data
                     DistributionCenter = null,
@@ -78,7 +78,7 @@ namespace CotoDesafio.Infrastructure
                 {
                     CarChassisNumber = "1236ejemplo",
                     CarModelName = "Sport",
-                    Date = DateTime.Now,
+                    Date = DateTime.Parse("205-08-24"),
                     DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
                     CarModel = null, // Evito el error de referencia circular en el seed data
                     DistributionCenter = null,
@@ -87,7 +87,7 @@ namespace CotoDesafio.Infrastructure
                 {
                     CarChassisNumber = "1237ejemplo",
                     CarModelName = "OffRoad",
-                    Date = DateTime.Now,
+                    Date = DateTime.Parse("205-08-24"),
                     DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222"),
                     CarModel = null, // Evito el error de referencia circular en el seed data
                     DistributionCenter = null,
@@ -96,7 +96,7 @@ namespace CotoDesafio.Infrastructure
                 {
                     CarChassisNumber = "1238ejemplo",
                     CarModelName = "SUV",
-                    Date = DateTime.Now,
+                    Date = DateTime.Parse("205-08-24"),
                     DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
                     CarModel = null, // Evito el error de referencia circular en el seed data
                     DistributionCenter = null,
@@ -105,7 +105,7 @@ namespace CotoDesafio.Infrastructure
                 {
                     CarChassisNumber = "1239ejemplo",
                     CarModelName = "Sedan",
-                    Date = DateTime.Now,
+                    Date = DateTime.Parse("205-08-24"),
                     DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
                     CarModel = null, // Evito el error de referencia circular en el seed data
                     DistributionCenter = null,
@@ -114,7 +114,7 @@ namespace CotoDesafio.Infrastructure
                 {
                     CarChassisNumber = "1211ejemplo",
                     CarModelName = "Sport",
-                    Date = DateTime.Now,
+                    Date = DateTime.Parse("205-08-24"),
                     DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222"),
                     CarModel = null, // Evito el error de referencia circular en el seed data
                     DistributionCenter = null,
@@ -123,7 +123,7 @@ namespace CotoDesafio.Infrastructure
                 {
                     CarChassisNumber = "11114ejemplo",
                     CarModelName = "OffRoad",
-                    Date = DateTime.Now,
+                    Date = DateTime.Parse("205-08-24"),
                     DistributionCenterId = Guid.Parse("22222222-2222-2222-2222-222222222222"),
                     CarModel = null, // Evito el error de referencia circular en el seed data
                     DistributionCenter = null,
@@ -132,7 +132,7 @@ namespace CotoDesafio.Infrastructure
                 {
                     CarChassisNumber = "1223334ejemplo",
                     CarModelName = "SUV",
-                    Date = DateTime.Now,
+                    Date = DateTime.Parse("205-08-24"),
                     DistributionCenterId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
                     CarModel = null, // Evito el error de referencia circular en el seed data
                     DistributionCenter = null,

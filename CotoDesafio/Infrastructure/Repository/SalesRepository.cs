@@ -15,6 +15,7 @@ namespace CotoDesafio.Infrastructure.Repository
         public async Task SaveAsync(Sale sale)
         {
             await context.Sales.AddAsync(sale);
+            await context.SaveChangesAsync();
         }
     }
 }
