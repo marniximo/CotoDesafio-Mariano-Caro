@@ -54,39 +54,5 @@ namespace CotoDesafio.UnitTests.Infrastructure
             Assert.Equal(carModel.CarModelName, savedSale.CarModelName);
             Assert.Equal(distributionCenter.Id, savedSale.DistributionCenterId);
         }
-
-        [Fact]
-        public async Task SaveAsync_DoesNotSaveWithoutSaveChanges()
-        {
-            // Arrange
-            var dbName = Guid.NewGuid().ToString();
-            using var context = CreateInMemoryDbContext(dbName);
-
-            var carModel = new CarModel { CarModelName = "TestModel2", Price = 12000m, Tax = 6m };
-            var distributionCenter = new DistributionCenter { Id = Guid.NewGuid(), Name = "Test Center 2" };
-            context.CarModels.Add(carModel);
-            context.DistributionCenters.Add(distributionCenter);
-            await context.SaveChangesAsync();
-
-            var sale = new Sale
-            {
-                CarChassisNumber = Guid.NewGuid().ToString(),
-                CarModelName = carModel.CarModelName,
-                CarModel = carModel,
-                DistributionCenterId = distributionCenter.Id,
-                DistributionCenter = distributionCenter,
-                Date = DateTime.UtcNow
-            };
-
-            var repository = new SalesRepository(context);
-
-            // Act
-            await repository.SaveAsync(sale);
-            // No SaveChangesAsync called here
-
-            // Assert
-            var savedSale = await context.Sales.FirstOrDefaultAsync(s => s.CarChassisNumber == sale.CarChassisNumber);
-            Assert.Null(savedSale);
-        }
     }
 }

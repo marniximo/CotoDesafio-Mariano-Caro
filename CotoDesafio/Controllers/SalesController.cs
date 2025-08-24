@@ -25,11 +25,11 @@ namespace CotoDesafio.Controllers
 
             try
             {
-                var saleId = await _mediator.Send(cmd);
-                if (saleId == null || (saleId is Guid guid && guid == Guid.Empty))
+                var sale = await _mediator.Send(cmd);
+                if (sale == null)
                     return UnprocessableEntity("Sale could not be registered.");
 
-                return Created("Sale", saleId);
+                return Created("Sale", sale.CarChassisNumber);
             }
             catch (ValidationException ex)
             {
@@ -76,6 +76,11 @@ namespace CotoDesafio.Controllers
             try
             {
                 var saleTotal = await _mediator.Send(new GetTotalSalesQuery());
+                if(saleTotal.Count() == 0)
+                {
+                    return NoContent();
+                }
+
                 return Ok(saleTotal);
             }
             catch (Exception)

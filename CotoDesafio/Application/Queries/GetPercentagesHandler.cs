@@ -26,7 +26,7 @@ namespace CotoDesafio.Application.Queries
                 var modelsGrouped = sales.GroupBy(s => s.CarModelName)
                                   .Select(g => new PercentageByModelDto(
                                       g.Key,
-                                      (decimal)g.Count() / totalSalesCount * 100 // porcentaje de ventas por modelo
+                                      Math.Round((decimal)g.Count() / totalSalesCount * 100, 2) // porcentaje de ventas por modelo
                                   )).ToList(); // agrupo las ventas por modelo de este centro y calculo el porcentaje con respecto al total de ventas en unidades de la empresa
                 var totalSales = new PercentageByCenterDto(
                     center.Id.ToString(),

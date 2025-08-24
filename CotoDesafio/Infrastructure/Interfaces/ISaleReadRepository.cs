@@ -6,5 +6,6 @@ namespace CotoDesafio.Infrastructure.Interfaces
     {
         Task<List<Sale>> GetTotalSalesByCenterAsync(Guid centerId);
         Task<int> GetTotalSalesCount();
+        Task<Sale?> GetSaleByCarChassisNumber(string chassisNumber);
     }
 }

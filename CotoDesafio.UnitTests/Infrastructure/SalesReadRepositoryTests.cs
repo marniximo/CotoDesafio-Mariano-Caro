@@ -171,5 +171,58 @@ namespace CotoDesafio.UnitTests.Infrastructure
             // Assert
             Assert.Equal(2, count);
         }
+
+        [Fact]
+        public async Task GetSaleByCarChassisNumber_ReturnsCorrectSale_WhenExists()
+        {
+            // Arrange
+            var dbName = Guid.NewGuid().ToString();
+            using var context = CreateInMemoryDbContext(dbName);
+
+            var carModel = new CarModel { CarModelName = "Coupe", Price = 18000m, Tax = 5m };
+            var center = new DistributionCenter { Id = Guid.NewGuid(), Name = "Center Coupe" };
+            context.CarModels.Add(carModel);
+            context.DistributionCenters.Add(center);
+
+            var chassisNumber = "CHASSIS-TEST-001";
+            var sale = new Sale
+            {
+                CarChassisNumber = chassisNumber,
+                CarModelName = carModel.CarModelName,
+                CarModel = carModel,
+                DistributionCenterId = center.Id,
+                DistributionCenter = center,
+                Date = DateTime.UtcNow
+            };
+            context.Sales.Add(sale);
+            await context.SaveChangesAsync();
+
+            var repository = new SalesReadRepository(context);
+
+            // Act
+            var result = await repository.GetSaleByCarChassisNumber(chassisNumber);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(chassisNumber, result!.CarChassisNumber);
+            Assert.Equal(carModel.CarModelName, result.CarModelName);
+            Assert.Equal(center.Id, result.DistributionCenterId);
+        }
+
+        [Fact]
+        public async Task GetSaleByCarChassisNumber_ReturnsNull_WhenNotExists()
+        {
+            // Arrange
+            var dbName = Guid.NewGuid().ToString();
+            using var context = CreateInMemoryDbContext(dbName);
+
+            var repository = new SalesReadRepository(context);
+
+            // Act
+            var result = await repository.GetSaleByCarChassisNumber("NON-EXISTENT-CHASSIS");
+
+            // Assert
+            Assert.Null(result);
+        }
     }
 }

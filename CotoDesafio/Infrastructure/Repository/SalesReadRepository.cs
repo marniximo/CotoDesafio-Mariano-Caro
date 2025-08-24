@@ -13,8 +13,17 @@ namespace CotoDesafio.Infrastructure.Repository
             this.context = context;
         }
 
+        public async Task<Sale?> GetSaleByCarChassisNumber(string chassisNumber) => 
+            await context.Sales.Where(s => s.CarChassisNumber == chassisNumber)
+                .Include(s => s.CarModel)
+                .Include(s => s.DistributionCenter)
+                .FirstOrDefaultAsync();
+
         public async Task<List<Sale>> GetTotalSalesByCenterAsync(Guid centerId) =>
-            await context.Sales.Where(s => s.DistributionCenterId == centerId).Include(s => s.DistributionCenter).ToListAsync();
+            await context.Sales.Where(s => s.DistributionCenterId == centerId)
+                .Include(s => s.CarModel)
+                .Include(s => s.DistributionCenter)
+                .ToListAsync();
 
         public async Task<int> GetTotalSalesCount() => await context.Sales.CountAsync();
     }
