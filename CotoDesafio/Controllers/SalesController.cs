@@ -26,19 +26,19 @@ namespace CotoDesafio.Controllers
         [HttpGet("GetTotalSalesByCenterId/{centerId}")]
         public async Task<IActionResult> GetByCenter(Guid centerId)
         {
-            
+            return Ok();
         }
 
         [HttpGet("GetTotalSales")]
         public async Task<IActionResult> GetTotal()
         {
-            
+            return Ok();
         }
 
         [HttpGet("GetPercentages")]
         public async Task<IActionResult> GetPercentages()
         {
-            
+            return Ok();
         }
     }
 }

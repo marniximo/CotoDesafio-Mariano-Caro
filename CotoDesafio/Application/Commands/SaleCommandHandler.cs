@@ -27,7 +27,7 @@ namespace CotoDesafio.Application.Commands
 
             var sale = new Sale
             {
-                CarChassisNumber = carModel.CarChassisNumber,
+                CarChassisNumber = command.CarChassisNumber,
                 CarModelName = carModel.CarModelName,
                 DistributionCenterId = command.CenterId,
                 Date = DateTime.Now,
