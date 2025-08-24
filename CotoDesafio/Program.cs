@@ -20,7 +20,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CarSalesDbContext>(options =>
     options.UseInMemoryDatabase("SalesDb"));
 
+// MediatR
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
+// Agregar Repositorios
+builder.Services.AddScoped<ICarModelReadRepository, CarModelReadRepository>();
+builder.Services.AddScoped<ISaleRepository, SalesRepository>();
+builder.Services.AddScoped<ISaleReadRepository, SalesReadRepository>();
+builder.Services.AddScoped<IDistributionCenterRepository, DistributionCenterRepository>();
+//
 
 builder.Services.AddControllers();
 

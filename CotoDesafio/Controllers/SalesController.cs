@@ -17,9 +17,10 @@ namespace CotoDesafio.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register()
+        public async Task<IActionResult> Register([FromBody] RegisterSaleCommand cmd)
         {
-            
+            var saleId = await _mediator.Send(cmd);
+            return Ok(saleId);
         }
 
         [HttpGet("GetTotalSalesByCenterId/{centerId}")]
